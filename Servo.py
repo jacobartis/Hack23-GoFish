@@ -18,6 +18,3 @@ def feeding_time():
     except KeyboardInterrupt:
         p.stop()
         GPIO.cleanup()
-
-
-feeding_time()
