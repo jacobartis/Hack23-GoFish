@@ -64,7 +64,7 @@ async def add_feed_time(ctx):
 
 ##command to print all auto fed times
 @commands.has_role("moderator")
-@bot.command(name="delete_feed_times",help = "shows all auto feed times")
+@bot.command(name="delete_feed_time",help = "shows all auto feed times")
 async def add_feed_time(ctx, time:str):
     feed_time = open("auto_feed_times.txt","w")
     new_time = []
@@ -76,6 +76,8 @@ async def add_feed_time(ctx, time:str):
         if x != new_time:
             feed_time.write(x)
             print(True)
+    
+    feed_time.close()
             
 
 
