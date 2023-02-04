@@ -2,6 +2,7 @@ import discord
 from discord.utils import get
 from discord.ext import commands
 import Servo
+import auto_feeder
 intents = discord.Intents.all()
 bot = commands.Bot(command_prefix=["\\","~"],intents = intents)
 
@@ -36,10 +37,10 @@ async def flashbang(ctx):
     else:
         await ctx.channel.send("flash bang failed")
 
-##command to turn on the lights
+##command to add a time to auto feeder
 @commands.has_role("moderator")
-@bot.command(name="add_auto_time",help = "adds a time for the feeder to automaticly trigger")
-async def add_auto_time(ctx, time:str):
+@bot.command(name="add_feed_time",help = "adds a time for the feeder to automaticly trigger")
+async def add_feed_time(ctx, time:str):
     print(time.split(","))
     try:
         feed_times = open("auto_feed_times.txt")
@@ -50,6 +51,14 @@ async def add_auto_time(ctx, time:str):
         feed_times.write(str(new_time))
     except:
         await ctx.channel.send("something went wrong")
+
+##command to print all auto fed times
+@commands.has_role("moderator")
+@bot.command(name="feed_times",help = "shows all auto feed times")
+async def add_feed_time(ctx):
+    await ctx.channel.send("current auto feed times:")
+    for x in open("auto_feed_times.txt").readlines():
+        await ctx.channel.send(x.strip())
 
 #Reads the token from token.txt and runs the corisponding bot
 token_f = open("token.txt","r")
