@@ -53,6 +53,13 @@ async def add_feed_time(ctx, time:str):
         new_time = []
         for x in time.split(","):
             new_time.append(int(x))
+        
+        for x in feed_times.readlines():
+            print(new_time,", ",x)
+            if new_time == x:
+                ctx.channel.send(f"{new_time} is already present on the auto feed schedule!")
+                return
+        
         feed_times.write("\n"+str(new_time))
         feed_times.close()
         await ctx.channel.send(f"added {new_time} to auto feed")
