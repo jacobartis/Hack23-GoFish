@@ -9,7 +9,11 @@ bot = commands.Bot(command_prefix=["\\","~"],intents = intents)
 @commands.has_role("moderator")
 @bot.command(name="feed",help = "moves the servo to feed the fish")
 async def feedfish(ctx, freq):
+    
+    #Checks the freq is an int
     try:
+        assert(int(freq))
+
         await ctx.channel.send("feeding time has begun, feeding")
         Servo.feeding_time(int(freq))
         await ctx.channel.send("feeding time has come to an end")
