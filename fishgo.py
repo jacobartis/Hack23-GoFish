@@ -60,7 +60,7 @@ async def add_feed_time(ctx, time:str):
 async def add_feed_time(ctx):
     await ctx.channel.send("current auto feed times:")
     for x in open("auto_feed_times.txt").readlines():
-        if x.strip() != 0:
+        if x.strip() != "":
             await ctx.channel.send(x.strip())
 
 ##command to print all auto fed times
