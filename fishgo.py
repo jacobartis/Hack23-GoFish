@@ -8,11 +8,6 @@ bot = commands.Bot(command_prefix=["\\","~"],intents = intents)
 ##command to move servo
 @commands.has_role("moderator")
 @bot.command(name="feed",help = "moves the servo to feed the fish")
-async def feedfish(ctx):
-    await ctx.channel.send("incorrect feed command, please put in form '~feed value' where value is a number")
-##command to move servo
-@commands.has_role("moderator")
-@bot.command(name="feed",help = "moves the servo to feed the fish")
 async def feedfish(ctx, freq):
     
     #Checks the freq is an int
@@ -24,7 +19,10 @@ async def feedfish(ctx, freq):
         await ctx.channel.send("feeding time has come to an end")
     except:
         await ctx.channel.send("incorrect feed command, please put in form '~feed value' where value is a number")
-
+#Handles the user not inputing a message
+@feedfish.error
+async def feedfisherror(ctx):
+    await ctx.channel.send("incorrect feed command, please put in form '~feed value' where value is a number")
 
 ##command to turn on the lights
 @commands.has_role("moderator")
