@@ -17,4 +17,4 @@ async def feedfish(ctx):
 ##    #run the type script code
 ##    
     
-bot.run('NzM5MjIxNDIyMjQ4OTUxODcw.GeB8kM.Ns9YZyN1SuGBDPk1gUPdbK_C9pbh-3cBVA_Fx0')
+bot.run('enter token here')
