@@ -36,6 +36,19 @@ async def flashbang(ctx):
     else:
         await ctx.channel.send("flash bang failed")
 
+##command to turn on the lights
+@commands.has_role("moderator")
+@bot.command(name="add_auto_time",help = "adds a time for the feeder to automaticly trigger")
+async def add_auto_time(ctx, time:str):
+    try:
+        feed_times = open("auto_feed_times.txt")
+        new_time = []
+        for x in time.split(","):
+            new_time.append(x)
+        feed_times.write(str(new_time))
+    except:
+        await ctx.channel.send("something went wrong")
+
 #Reads the token from token.txt and runs the corisponding bot
 token_f = open("token.txt","r")
 bot.run(token_f.readline())
