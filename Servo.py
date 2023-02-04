@@ -10,7 +10,7 @@ def feeding_time():
     p = GPIO.PWM(servoPIN, 50) # GPIO 17 for PWM with 50Hz
     p.start(2.5) # Initialization
     try:
-        for x in range(10):
+        for x in range(5):
             p.ChangeDutyCycle(5)
             time.sleep(0.5)
             p.ChangeDutyCycle(7.5)
