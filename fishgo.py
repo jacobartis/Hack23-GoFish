@@ -50,9 +50,8 @@ async def add_feed_time(ctx, time:str):
         print(new_time)
         feed_times.write("\n"+str(new_time))
         feed_times.close()
-        await ctx.channel.send(("added {time:array} to auto feed").format(time = new_time))
+        await ctx.channel.send(f"added {new_time} to auto feed")
     except:
-        print(Exception)
         await ctx.channel.send("something went wrong")
 
 ##command to print all auto fed times
