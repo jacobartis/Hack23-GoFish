@@ -15,11 +15,11 @@ async def feedfish(ctx, freq):
     Servo.feeding_time(int(freq))
     await ctx.channel.send("feeding time has come to an end")
 ##command to turn on the lights
-##@commands.has_role("moderator")
-##@bot.command(name="light",help = "toggles the lights")
-##async def flashbang(ctx):
-##    #run the type script code
-##    
+@commands.has_role("moderator")
+@bot.command(name="light",help = "toggles the lights")
+async def flashbang(ctx):
+    Servo.flash_bang()
+    await ctx.channel.send("flash bang out!")
 
 #Reads the token from token.txt and runs the corisponding bot
 token_f = open("token.txt","r")
