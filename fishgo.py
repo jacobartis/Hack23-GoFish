@@ -21,7 +21,7 @@ async def feedfish(ctx, freq):
         await ctx.channel.send("incorrect feed command, please put in form '~feed value' where value is a number")
 #Handles the user not inputing a message
 @feedfish.error
-async def feedfisherror(ctx):
+async def feedfisherror(ctx, error):
     await ctx.channel.send("incorrect feed command, please put in form '~feed value' where value is a number")
 
 ##command to turn on the lights
