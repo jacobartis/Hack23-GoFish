@@ -8,9 +8,9 @@ bot = commands.Bot(command_prefix=["\\","~"],intents = intents)
 ##command to move servo
 @commands.has_role("moderator")
 @bot.command(name="feed",help = "moves the servo to feed the fish")
-async def feedfish(ctx):
-    await ctx.channel.send("feeding time has begun")
-    Servo.feeding_time()
+async def feedfish(ctx, freq):
+    await ctx.channel.send("feeding time has begun, feeding ",freq," times!")
+    Servo.feeding_time(freq)
     await ctx.channel.send("feeding time has come to an end")
 ##command to turn on the lights
 ##@commands.has_role("moderator")
