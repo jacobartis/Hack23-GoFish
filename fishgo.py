@@ -45,7 +45,8 @@ async def add_auto_time(ctx, time:str):
         feed_times = open("auto_feed_times.txt")
         new_time = []
         for x in time.split(","):
-            new_time.append(x)
+            new_time.append(int(x))
+        print(new_time)
         feed_times.write(str(new_time))
     except:
         await ctx.channel.send("something went wrong")
