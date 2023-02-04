@@ -43,12 +43,13 @@ async def flashbang(ctx):
 async def add_feed_time(ctx, time:str):
     print(time.split(","))
     try:
-        feed_times = open("auto_feed_times.txt")
+        feed_times = open("auto_feed_times.txt","a")
         new_time = []
         for x in time.split(","):
             new_time.append(int(x))
         print(new_time)
         feed_times.write(str(new_time))
+        feed_times.close()
     except:
         await ctx.channel.send("something went wrong")
 
