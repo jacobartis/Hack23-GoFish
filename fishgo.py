@@ -41,18 +41,23 @@ async def flashbang(ctx):
 @commands.has_role("moderator")
 @bot.command(name="add_feed_time",help = "adds a time for the feeder to automaticly trigger")
 async def add_feed_time(ctx, time:str):
-    print(time.split(","))
     try:
+        #Checks the input are correct
+        assert(len(time.split(","))==3)
+        assert(int(time.split(",")[0])<24 and int(time.split(",")[0])>0)
+        assert(int(time.split(",")[1])<60 and int(time.split(",")[1])>0)
+        assert(int(time.split(",")[2])<60 and int(time.split(",")[2])>0)
+
+        #Opens the auto feed file, formats the input and write to file
         feed_times = open("auto_feed_times.txt","a")
         new_time = []
         for x in time.split(","):
             new_time.append(int(x))
-        print(new_time)
         feed_times.write("\n"+str(new_time))
         feed_times.close()
         await ctx.channel.send(f"added {new_time} to auto feed")
     except:
-        await ctx.channel.send("something went wrong")
+        await ctx.channel.send("error! please put in form 'add_feed_time hour,minute,second'")
 
 ##command to print all auto fed times
 @commands.has_role("moderator")
@@ -67,17 +72,8 @@ async def add_feed_time(ctx):
 @commands.has_role("moderator")
 @bot.command(name="delete_feed_time",help = "shows all auto feed times")
 async def add_feed_time(ctx, time:str):
-    feed_time = open("auto_feed_times.txt","w")
-    new_time = []
-    for x in time.split(","):
-        new_time.append(int(x))
-    
-    for x in feed_time.readlines():
-        print(x,", ",new_time)
-        if x != new_time:
-            feed_time.write(x)
-            print(True)
-    
+    feed_time = open("auto_feed_times.txt","r")
+
     feed_time.close()
             
 
