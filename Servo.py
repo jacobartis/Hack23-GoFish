@@ -1,6 +1,7 @@
 import RPi.GPIO as GPIO
 import time
 
+#Moves the servo back and forth 10 times
 def feeding_time():
     servoPIN = 17
     GPIO.setmode(GPIO.BCM)
