@@ -20,6 +20,9 @@ async def feedfish(ctx, freq):
     except:
         await ctx.channel.send("incorrect feed command, please put in form '~feed value' where value is a number")
 
+async def feedfish(ctx):
+    await ctx.channel.send("incorrect feed command, please put in form '~feed value' where value is a number")
+
 ##command to turn on the lights
 @commands.has_role("moderator")
 @bot.command(name="light",help = "toggles the lights")
