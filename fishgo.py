@@ -10,7 +10,8 @@ bot = commands.Bot(command_prefix=["\\","~"],intents = intents)
 @bot.command(name="feed",help = "moves the servo to feed the fish")
 async def feedfish(ctx, freq):
     print(freq)
-    await ctx.channel.send(str("feeding time has begun, feeding ",freq," times!"))
+    string = str("feeding time has begun, feeding ",freq," times!")
+    await ctx.channel.send(string)
     Servo.feeding_time(int(freq))
     await ctx.channel.send("feeding time has come to an end")
 ##command to turn on the lights
