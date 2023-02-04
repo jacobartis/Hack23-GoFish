@@ -62,6 +62,25 @@ async def add_feed_time(ctx):
     for x in open("auto_feed_times.txt").readlines():
         await ctx.channel.send(x.strip())
 
+##command to print all auto fed times
+@commands.has_role("moderator")
+@bot.command(name="delete_feed_times",help = "shows all auto feed times")
+async def add_feed_time(ctx, time:str):
+    feed_time = open("auto_feed_times.txt","w")
+    new_time = []
+    for x in time.split(","):
+        new_time.append(int(x))
+    
+    for x in feed_time.readlines():
+        print(x,", ",new_time)
+        if x != new_time:
+            feed_time.write(x)
+            print(True)
+            
+
+
+
+
 #Reads the token from token.txt and runs the corisponding bot
 token_f = open("token.txt","r")
 bot.run(token_f.readline())
