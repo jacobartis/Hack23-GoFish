@@ -18,5 +18,7 @@ async def feedfish(ctx):
 ##async def flashbang(ctx):
 ##    #run the type script code
 ##    
-    
-bot.run('enter token here')
+
+token_f = open("token.txt","r")
+bot.run(token_f.readline())
+token_f.close()
