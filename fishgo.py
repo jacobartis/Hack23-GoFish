@@ -18,11 +18,13 @@ async def feedfish(ctx, freq):
         Servo.feeding_time(int(freq))
         await ctx.channel.send("feeding time has come to an end")
     except:
-        await ctx.channel.send("incorrect feed command, please put in form '~feed value' where value is a number")
+        await ctx.channel.send("incorrect feed command, please put in form '~feed value' where value is a number or blank")
 #Handles the user not inputing a message
 @feedfish.error
 async def feedfisherror(ctx, error):
-    await ctx.channel.send("incorrect feed command, please put in form '~feed value' where value is a number")
+    await ctx.channel.send("feeding time has begun, feeding")
+    Servo.feeding_time(5)
+    await ctx.channel.send("feeding time has come to an end")
 
 ##command to turn on the lights
 @commands.has_role("moderator")
