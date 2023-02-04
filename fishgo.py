@@ -40,7 +40,7 @@ async def flashbang(ctx):
 @commands.has_role("moderator")
 @bot.command(name="add_auto_time",help = "adds a time for the feeder to automaticly trigger")
 async def add_auto_time(ctx, time:str):
-    print(time)
+    print(time.split(","))
     try:
         feed_times = open("auto_feed_times.txt")
         new_time = []
