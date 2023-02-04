@@ -17,8 +17,11 @@ async def feedfish(ctx, freq):
 @commands.has_role("moderator")
 @bot.command(name="light",help = "toggles the lights")
 async def flashbang(ctx):
-    Servo.flash_bang()
-    await ctx.channel.send("flash bang out!")
+    x = Servo.flashbang()
+    if x.status_code == 200:
+        await ctx.channel.send("flash bang out!")
+    else:
+        await ctx.channel.send("flash bang failed")
 
 #Reads the token from token.txt and runs the corisponding bot
 token_f = open("token.txt","r")
