@@ -19,6 +19,7 @@ async def feedfish(ctx):
 ##    #run the type script code
 ##    
 
+#Reads the token from token.txt and runs the corisponding bot
 token_f = open("token.txt","r")
 bot.run(token_f.readline())
 token_f.close()
