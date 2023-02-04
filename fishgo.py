@@ -1,6 +1,7 @@
 import discord
 from discord.utils import get
 from discord.ext import commands
+from ast import literal_eval
 import Servo
 import auto_feeder
 intents = discord.Intents.all()
@@ -55,14 +56,15 @@ async def add_feed_time(ctx, time:str):
             new_time.append(int(x))
         
         for x in feed_times.readlines():
-            print(new_time,", ",x)
-            if new_time == x:
+            if new_time == literal_eval(x):
                 ctx.channel.send(f"{new_time} is already present on the auto feed schedule!")
                 return
         
         feed_times.write("\n"+str(new_time))
         feed_times.close()
         await ctx.channel.send(f"added {new_time} to auto feed")
+
+        auto_feeder.update_times()
     except:
         await ctx.channel.send("error! please put in form 'add_feed_time hour,minute,second'")
 
@@ -77,13 +79,46 @@ async def add_feed_time(ctx):
 
 ##command to print all auto fed times
 @commands.has_role("moderator")
-@bot.command(name="delete_feed_time",help = "shows all auto feed times")
+@bot.command(name="delete_feed_time",help = "deletes a time on the auto feed timetable")
 async def add_feed_time(ctx, time:str):
-    feed_time = open("auto_feed_times.txt","r")
+    try:
+        #Checks the input are correct
+        assert(len(time.split(","))==3)
+        assert(int(time.split(",")[0])<24 and int(time.split(",")[0])>0)
+        assert(int(time.split(",")[1])<60 and int(time.split(",")[1])>0)
+        assert(int(time.split(",")[2])<60 and int(time.split(",")[2])>0)
 
-    feed_time.close()
-            
+        #Opens the auto feed file, formats the input and write to file
+        
+        new_time = []
+        for x in time.split(","):
+            new_time.append(int(x))
+        
+        #Copies current feed times file
+        lines = []
+        with open("auto_feed_times.txt","r") as feed_times:
+            lines = feed_times.readlines()
+        
+        #Clears the file and adds back lines not equal to the given value
+        del_val = 0
+        with open("auto_feed_times.txt","w") as feed_times:
+            for line in lines:
+                if new_time != literal_eval(line):
+                    feed_times.write(line)
+                else:
+                    del_val += 1
+        
+        auto_feeder.update_times()
 
+        #Checks if there was a valid value to delete
+        if del_val==0:
+            ctx.channel.send(f"error! {time} is not pressent on the timetable")
+            return
+        
+        ctx.channel.send(f"{time} removed from the auto feed timetable")
+
+    except:
+        await ctx.channel.send("error! please put in form 'delete_feed_time hour,minute,second'")
 
 
 
@@ -91,3 +126,5 @@ async def add_feed_time(ctx, time:str):
 token_f = open("token.txt","r")
 bot.run(token_f.readline())
 token_f.close()
+
+auto_feeder.start_check()
