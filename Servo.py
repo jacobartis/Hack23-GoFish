@@ -11,6 +11,7 @@ def feeding_time(freq):
     p.start(2.5) # Initialization
     try:
         for x in range(freq):
+            print(x)
             p.ChangeDutyCycle(5)
             time.sleep(0.5)
             p.ChangeDutyCycle(7.5)
