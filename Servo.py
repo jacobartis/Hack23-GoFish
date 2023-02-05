@@ -1,5 +1,6 @@
 import RPi.GPIO as GPIO
 import time
+import requests
 
 #Moves the servo back and forth 10 times
 def feeding_time(freq):
@@ -19,3 +20,8 @@ def feeding_time(freq):
     except KeyboardInterrupt:
         p.stop()
         GPIO.cleanup()
+
+def flashbang():
+    url = 'http://localhost:5000/flashbang'
+    x = requests.get(url)
+    return(x.json())

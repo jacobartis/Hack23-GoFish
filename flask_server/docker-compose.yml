@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  fishgo_service:
+    build: ./services/fishgo_service
+    command: >
+      sh -c "playwright install &&
+             python manage.py run -h 0.0.0.0"
+    volumes:
+    - ./services/fishgo_service/:/usr/src/app/
+    ports:
+     - 5000:5000
+    env_file:
+     - ./.env
+    restart: always
+  
