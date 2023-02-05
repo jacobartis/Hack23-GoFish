@@ -92,7 +92,7 @@ async def feed_times(ctx):
 
 ##command to print all auto fed times
 @commands.has_role("moderator")
-@bot.command(name="delete_feed_time",help = "deletes a time on the auto feed timetable")
+@bot.command(name="delete_feed_time",help = "deletes a time on the auto feed timetable ** Curently throws error and delete everything")
 async def delete_feed_time(ctx, time:str):
     try:
         #Checks the input are correct
@@ -116,10 +116,10 @@ async def delete_feed_time(ctx, time:str):
         with open("auto_feed_times.txt","w") as feed_times:
             if len(lines)>1:
                 for line in lines:
-                    if new_time != literal_eval(line.strip()):
+                    if new_time != literal_eval(line.strip()) and line.strip()!="":
                         feed_times.write(line)
             elif len(lines)==1:
-                if new_time == literal_eval(lines.strip()):
+                if new_time == literal_eval(lines.strip()) and line.strip()!="":
                     await ctx.channel.send(f"{new_time} isn't present on the auto feed schedule!")
                     return
         await ctx.channel.send(f"{time} removed from the auto feed timetable")
