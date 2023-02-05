@@ -107,8 +107,6 @@ async def add_feed_time(ctx, time:str):
                     feed_times.write(line)
                 else:
                     del_val += 1
-        
-        auto_feeder.update_times()
 
         #Checks if there was a valid value to delete
         if del_val==0:
@@ -120,7 +118,12 @@ async def add_feed_time(ctx, time:str):
     except:
         await ctx.channel.send("error! please put in form 'delete_feed_time hour,minute,second'")
 
-
+##command to clear all auto feed times
+@commands.has_role("moderator")
+@bot.command(name="clear_feed_time",help = "deletes all current auto feed times")
+async def add_feed_time(ctx, time:str):
+    with open("auto_feed_times.txt","w") as feed_times:
+        await ctx.channel.send("Auto feed times have been cleared")
 
 #Reads the token from token.txt and runs the corisponding bot
 token_f = open("token.txt","r")
