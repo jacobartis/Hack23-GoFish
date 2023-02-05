@@ -24,4 +24,4 @@ def feeding_time(freq):
 def flashbang():
     url = 'http://localhost:5000/flashbang'
     x = requests.get(url)
-    return(x.json())
+    return(x)
