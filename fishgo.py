@@ -118,7 +118,7 @@ async def delete_feed_time(ctx, time:str):
 
 ##command to clear all auto feed times
 @commands.has_role("moderator")
-@bot.command(name="clear_feed_time",help = "deletes all current auto feed times")
+@bot.command(name="clear_feed_times",help = "deletes all current auto feed times")
 async def add_feed_time(ctx, time:str):
     with open("auto_feed_times.txt","w") as feed_times:
         await ctx.channel.send("Auto feed times have been cleared")
