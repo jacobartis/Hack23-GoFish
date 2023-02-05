@@ -111,8 +111,6 @@ async def delete_feed_time(ctx, time:str):
             for line in lines:
                 if new_time != literal_eval(line.strip()):
                     feed_times.write(line)
-                else:
-                    del_val += 1
         await ctx.channel.send(f"{time} removed from the auto feed timetable")
 
     except:
