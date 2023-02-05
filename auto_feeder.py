@@ -14,9 +14,10 @@ def update_times():
 
 #Checks the current time against the list of set times every second
 def start_check():
-    update_times()
     while True:
+        update_times()
         if times.__contains__([dt.now().hour,dt.now().minute,dt.now().second]):
             feeding_time(5)
         sl(1)
+        
 
