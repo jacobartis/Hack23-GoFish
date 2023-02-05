@@ -9,8 +9,13 @@ times = []
 def update_times():
     times.clear()
     time_file = open("auto_feed_times.txt")
-    for time in time_file.readlines():
-        times.append(lit_eval(time.strip()))
+    file_times = time_file.readlines()
+    
+    if len(file_times) == 1:
+        times.append(lit_eval(file_times.strip()))
+    else:
+        for time in file_times:
+            times.append(lit_eval(time.strip()))
 
 #Checks the current time against the list of set times every second
 def start_check():
