@@ -15,9 +15,8 @@ def update_times():
         times.append(lit_eval(file_times.strip()))
     else:
         for time in file_times:
-            print(file_times)
-            print(time)
-            times.append(lit_eval(time.strip()))
+            if time != "\n":
+                times.append(lit_eval(time.strip()))
 
 #Checks the current time against the list of set times every second
 def start_check():
