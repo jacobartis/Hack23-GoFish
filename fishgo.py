@@ -62,8 +62,14 @@ async def add_feed_time(ctx, time:str):
             new_time.append(int(x))
         
         with open("auto_feed_times.txt","r") as feed_times:
-            for x in feed_times.readlines():
-                if new_time == literal_eval(x.strip()):
+            if len(feed_times.readlines())>1:
+                for x in feed_times.readlines():
+                    if new_time == literal_eval(x.strip()):
+                        await ctx.channel.send(f"{new_time} is already present on the auto feed schedule!")
+                        return
+            
+            elif len(feed_times.readlines())==1:
+                if new_time == literal_eval(feed_times.readline().strip()):
                     await ctx.channel.send(f"{new_time} is already present on the auto feed schedule!")
                     return
         
@@ -108,9 +114,14 @@ async def delete_feed_time(ctx, time:str):
         
         #Clears the file and adds back lines not equal to the given value
         with open("auto_feed_times.txt","w") as feed_times:
-            for line in lines:
-                if new_time != literal_eval(line.strip()):
-                    feed_times.write(line)
+            if len(feed_times.readlines())>1:
+                for line in lines:
+                    if new_time != literal_eval(line.strip()):
+                        feed_times.write(line)
+            elif len(feed_times.readlines())==1:
+                if new_time == literal_eval(feed_times.readline().strip()):
+                    await ctx.channel.send(f"{new_time} isn't present on the auto feed schedule!")
+                    return
         await ctx.channel.send(f"{time} removed from the auto feed timetable")
 
     except:
